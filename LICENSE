@@ -1,0 +1,11 @@
+Broken World
+Copyright (c) 2026 Ernest1101. All Rights Reserved.
+
+The source code is published so it can be read and learned from. You may not redistribute this mod,
+or modified versions of it, without permission.
+
+Third-party parts, under their own licenses:
+- The screamer sound (src/main/resources/assets/brokenworld/sounds/scream.ogg) is made from
+  "Horror Hit Soundpack 1" by psychhead_ (CC0, opengameart.org).
+- The cover font Rubik Glitch is under the SIL Open Font License 1.1 (the font file is in branch main, cover/fonts).
+- Minecraft is a trademark of Mojang; no Minecraft assets are included in this repository.
