@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "brokenworld",
+  "version": "${version}",
+  "name": "Broken World",
+  "description": "Just survive. But one day you will notice the trees look wrong... and something is watching you.\nScreamer sound made from \"Horror Hit Soundpack 1\" by psychhead_ (CC0, opengameart.org)",
+  "authors": ["BrokenWorld"],
+  "license": "All Rights Reserved",
+  "icon": "assets/brokenworld/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.brokenworld.BrokenWorld"],
+    "client": ["com.brokenworld.client.BrokenWorldClient"],
+    "fabric-gametest": ["com.brokenworld.test.FinaleGameTest"]
+  },
+  "mixins": ["brokenworld.mixins.json"],
+  "accessWidener": "brokenworld.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "indium": "*"
+  }
+}

@@ -1,0 +1,35 @@
+# gradle / loom
+build/
+.gradle/
+out/
+bin/
+classes/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.metadata/
+*.launch
+
+# the game runs (test worlds, logs, configs)
+run/
+run-server/
+
+# ready-made jars for playing (and Fabric API, which is not ours)
+mods-for-game/
+
+# Blender backups
+*.blend1
+*.blend2
+
+# Minecraft's own block textures, extracted from the game jar for the cover - Mojang's, not ours to publish
+blender/cover_textures/
+
+# intermediate cover renders (tools/render_cover.py makes them, tools/cover_text.py finishes them)
+cover/*_raw.png

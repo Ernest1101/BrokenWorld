@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.brokenworld.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntityDataMixin",
+    "GameTestServerMixin",
+    "ServerPlayerLanguageMixin"
+  ],
+  "client": [
+    "client.SoundEngineMixin",
+    "client.AgeableListModelAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

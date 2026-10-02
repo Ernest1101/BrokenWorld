@@ -1,0 +1,11 @@
+{
+  "scream": {
+    "sounds": [
+      {
+        "name": "brokenworld:scream",
+        "stream": false
+      }
+    ],
+    "subtitle": "subtitles.brokenworld.scream"
+  }
+}
