@@ -1,204 +1,171 @@
-# Broken World (Fabric 1.20.1)
+# Broken World
 
-Просто выживайте. На второй день мир «ломается»: текстуры блоков начинают путаться —
-ствол дуба рисуется как берёза или камень, листва как вишнёвая или как руда. Сначала только деревья,
-потом земля, камень, трава и цветы. И появляется чёрный силуэт.
+![Broken World](cover/cover.png)
 
-Текстуры не свои — это настоящие текстуры Minecraft, просто не на своих местах.
-Сами блоки не меняются (дуб остаётся дубом и выпадает дубом), меняется только то, как они нарисованы.
+**Just survive. But one day you will notice the trees look wrong... and something is watching you.**
 
-## Установка
-1. **Fabric Loader** для Minecraft **1.20.1** (установщик с fabricmc.net) и **Fabric API** для 1.20.1.
-2. Скопировать `build/libs/brokenworld-1.0.0.jar` (и Fabric API) в папку `mods`.
-3. Если стоит **Sodium**, нужен ещё **Indium** — иначе текстуры не будут путаться (остальное работает и так).
+A slow-burn horror mod for Minecraft **1.20.1**. It starts as a normal survival world; then the world slowly
+breaks, a black silhouette starts watching you, and on the third night it all ends.
 
-Играть вместе: мод нужен у всех игроков и на сервере.
+- Branch **`main`** – Fabric (this branch)
+- Branch **`forge`** – the same mod for Forge
 
-Пересобрать: `gradlew build`. Запустить тестовый клиент: `gradlew runClient`.
+The "wrong" textures are not new art: they are Minecraft's own textures, just on the wrong blocks. The blocks
+themselves do not change (an oak log stays an oak log and drops as one) – only the way they are drawn.
 
-Версии: ветка `main` — Fabric, ветка `forge` — та же версия мода на Forge (обе поддерживаются вместе).
+## Installation (Fabric)
+1. **Fabric Loader** for Minecraft **1.20.1** and **Fabric API** for 1.20.1.
+2. Put `brokenworld-1.0.0.jar` (and Fabric API) into the `mods` folder.
+3. If you use **Sodium**, also install **Indium** – otherwise the broken textures will not show (everything else works).
 
-## Стадии
-| Стадия | Когда | Что происходит |
+Multiplayer: the mod is needed on the server **and** on every client.
+
+> ⚠️ By default **the world is deleted at the very end** of the story (singleplayer / the LAN host).
+> Play in a new world, or set `deleteWorldAtEnd = false` in the config.
+
+## Stages
+| Stage | When | What happens |
 |---|---|---|
-| 0 | первый день | обычная игра |
-| 1 | день 2 | путаются текстуры деревьев (пятнами, всё больше); силуэт стоит вдали, выглядывает из-за деревьев, стоит на кронах |
-| 2 | +~0,4 дня | путаются уже все блоки; ходит за вами, появляется ночью у дома, светятся глаза; гаснут факелы, открываются двери, шаги, звуки копания |
-| 3 | +~0,4 дня | у одного блока разные текстуры на разных гранях; силуэт стоит прямо за спиной; редкий скример — бежит на вас |
-| 4 | день 3 | **финал** (см. ниже) |
+| 0 | day 1 | a normal game – until the first sunset |
+| 1 | day 2 | tree textures get mixed up (in patches, more and more); sounds start to break; the silhouette stands far away, peeks out from behind trees, stands on the canopy |
+| 2 | +~0.4 days | every block is mixed up, every sound is broken; it follows you, stands by your house at night, hangs from ceilings, looks in through your window; torches go out, doors open, footsteps, digging sounds |
+| 3 | +~0.4 days | different textures on different faces of one block; it stands right behind you; sometimes it rushes at you |
+| 4 | day 3 | **the finale** (see below) |
 
-Дни считаются по игровым часам: если проспать ночь, она тоже засчитывается.
+Days follow the in-game clock: sleeping through the night counts too. (1 day = 20 minutes.)
 
-## Первый знак (день 1)
-На первом закате, когда солнце касается горизонта, **день и ночь начинают быстро мигать** — утро, ночь, утро,
-ночь, с неровными промежутками — **10 секунд**, а потом остаётся **ночь**. Один раз за мир, без звуков и
-сообщений. (`/brokenworld sunset` — показать сейчас.)
+## The first sign (day 1)
+At the first sunset, when the sun touches the horizon, **day and night start flickering** – morning, night,
+morning, night, at uneven intervals – for **10 seconds**, and then it stays **night**. Once per world, no sound,
+no message. (`/brokenworld sunset` shows it now.)
 
-## Мир ломается постепенно
-Чем дальше стадия, тем чаще и сильнее:
-- **Мобы без лица.** Время от времени у всех мобов вокруг пропадает лицо — голова гладкая, цвета кожи.
-  Через минуту-две лица возвращаются. Стадия 1 — редко, стадия 3 — часто и надолго.
-- **Мир рассыпается** (со стадии 2): вдали, где ты не смотришь, появляются **дыры до самого дна мира**
-  и **куски земли, висящие в воздухе**. Только природная земля, не ближе 32 блоков к твоей кровати,
-  в постройки не врезается.
-- **Скримеры в обычной игре** (со стадии 2, ночью или в темноте): внезапно лицо и удар, потом картинка
-  возвращается. Стадия 2 — раз в 15–25 минут, стадия 3 — раз в 7–14.
-- **Животные как игроки.** Некоторые коровы, свиньи, овцы и курицы ведут себя как игроки (внешне ничем
-  не отличаются — выдаёт только поведение): не сводят с тебя глаз, **замирают, когда ты смотришь**,
-  и подбираются с прыжками, когда отворачиваешься; иногда **копают блоки** (с трещинами, как игрок)
-  или **строят столб** из земли под собой. Со стадией их больше (до 3 рядом с каждым игроком).
+## The world breaks, little by little
+The further the stages go, the more often and the worse:
+- **Shuffled textures** – real Minecraft textures on the wrong blocks: trees first, then everything.
+- **Broken sounds** – every sound plays as another one (always the same swap in a world: a cow may always "moo"
+  like a door); now and then a sound stutters, drops out or comes out slow and deep. From stage 2 on, every sound.
+- **Faceless mobs** – now and then every mob around loses its face (a smooth, skin-coloured head). The faces come
+  back after a minute or two.
+- **The world falls apart** (from stage 2): far away, where you are not looking, **holes down to the bottom of the
+  world** and **pieces of ground floating in the air** appear. Only natural ground, never near your bed or your builds.
+- **Jumpscares in normal play** (from stage 2, at night or in the dark).
+- **Animals that act like players** – some cows, pigs, sheep and chickens look normal but behave like players:
+  they stare at you, **freeze when you look**, sneak up with jumps when you turn away, sometimes **dig blocks** or
+  **pillar up** with dirt.
 
-## Чужой игрок в чате
-Время от времени (со стадии 1) в твой мир «заходит» другой игрок: жёлтое «… присоединился к игре», его ник
-в списке на TAB, и он пишет в чат — сначала «привет», «ты тоже это видишь?», потом «я у твоего дома»,
-«он стоит у тебя за спиной», а под конец «мой мир удалился». Если ответить — через пару секунд он повторит
-твоё сообщение слово в слово. Потом «… покинул игру». На стадии 3 иногда пишет **от твоего имени**.
-Видит его только тот, к кому он пришёл; в одном мире это всегда один и тот же ник. Настройка `fakeChat`.
+## Somebody else in the chat
+Now and then (from stage 1) another player "joins" your world: the yellow "… joined the game", their name in the
+TAB list, and they write in chat – "hi", "do you see it too?", later "i'm at your house", "it's standing behind
+you"... If you answer, they repeat your message word for word. Only the player they came for sees them.
 
-**Если играете не одни** — он притворяется одним из ваших игроков: пишет тебе **шёпотом от имени друга**
-(как `/msg`, остальные не видят), **его манерой** (строчными или нет, с точками или без, с его «)»),
-иногда **повторяет его настоящие старые сообщения** невпопад, а на твои ответы отвечает его же словами
-(максимум два раза, потом замолкает). Друг ничего этого не писал.
+**If you play with friends**, it pretends to be one of them instead: it whispers to you **in your friend's name**,
+**in their writing style**, sometimes repeating their real old messages. Your friend never wrote any of it.
 
-## Дом больше внутри, чем снаружи
-Когда мир уже сломан: если отойти от дома (от своей кровати) дальше 48 блоков и потом зайти обратно —
-внутри дом **втрое шире и вдвое выше**: те же стены, окна и пол, а мебель одиноко стоит посреди огромных комнат.
-Снаружи дом обычный.
-- Вышел через дверь — стоишь у своей двери снаружи.
-- Пытаешься сломать стены изнутри — блок не ломается, а ты вдруг снова в своём маленьком доме.
-- Сундуки внутри большого дома — пустые копии; вещи, положенные в них, там и останутся.
+## Your house is bigger on the inside
+Once the world is broken: go more than 48 blocks away from your house (your bed) and come back – inside, it is
+**three times wider and twice as tall**: the same walls, windows and floor, your furniture alone in huge rooms.
+From outside it looks normal. Walk out through the door and you are outside your door; try to break the walls from
+inside and you are suddenly back in your small house.
 
-Домом считается закрытое пространство вокруг кровати (двери считаются стенами, крыша должна быть не стеклянной).
+## It was here
+- **Fake disconnect** (from stage 2, once per stage, at night or indoors): the game's real "Connection Lost"
+  screen, then "Loading terrain..." – and while you were "gone", torches moved, doors opened, a chest was gone
+  through, there is a sign behind you saying "turn around", and you are facing it. Nothing can hurt you meanwhile.
+- **Somebody visits your house** (from stage 2, while you are far from your bed): a sign by your bed, a diary in a
+  chest written in your name, a shuffled chest, moved torches, open doors, a trail of footprints through the grass
+  to your door. Nothing is broken or lost.
 
-## Финал (третий день)
-1. **Провал.** Силуэт больше не появляется. Когда игрок идёт, он **проваливается сквозь землю** — камера проходит
-   через текстуры блоков, потом чёрный экран. Остальные проваливаются следом (максимум через 12 секунд).
-2. **Тоннель.** Все игроки просыпаются вместе в начале бесконечного тоннеля (измерение `brokenworld:tunnel`).
-   Вдали стоит силуэт и смотрит. Через **200 блоков** он появляется далеко позади и идёт следом:
-   сначала медленно, потом быстрее, чем можно бежать.
-3. **Лабиринт.** Кого догнал — **скример**, и игрок просыпается в тёмном лабиринте. В тупиках лежат **5 записок**
-   (наведи курсор — прочитаешь). Их надо **бросить в яму** в центре лабиринта (клавиша Q). Иногда в конце коридора
-   стоит он — и исчезает, если подойти. Потерянная записка появляется снова на своём месте.
-4. **Зал.** Когда все 5 записок в яме, все игроки переносятся в **очень длинный зал** и **не могут двигаться**
-   (только смотреть). Вдали, посередине, он стоит за **кафедрой и читает книгу** — **30 секунд**, слышно, как
-   переворачиваются страницы. Потом кафедра взрывается **бурей частиц** и исчезает, он **вырастает вдвое**
-   (выше и шире), поднимает голову и **идёт прямо** на вас — медленно, потом всё быстрее.
-5. **Конец.** Догнал — **скример и скрип**, игра выходит из мира, и **мир удаляется** (в одиночной игре;
-   настройка `deleteWorldAtEnd`). На сервере всех игроков просто отключает.
+## The silhouette
+It never attacks you directly and cannot be killed: notice it and look away, stare too long, come close or hit it
+– and it is gone.
+- **far** – stands far away on the horizon, staring
+- **tree_side** – peeks out from behind a tree trunk
+- **tree_top** – stands on a treetop, looking down
+- **behind** – right behind you; turn around and it vanishes
+- **follow** – follows you while you are not looking, freezes when you look (in caves: crawling, or running on all fours like a spider)
+- **cave** – stands in a dark cave passage
+- **house** – at night, outside by your house
+- **ceiling** – hangs upside down from a ceiling (caves, your house)
+- **window** – presses its face and hands to the window of the room you are in and taps on the glass
+- **rush** – (stage 3) once noticed, it runs at you with its mouth open
 
-В финале игроки в режиме приключения (ломать ничего нельзя), после — режим возвращается.
-Если умереть в лабиринте или зале — возвращаешься туда же; в тоннеле — просыпаешься дома и выбываешь.
+Its poses are animated in Blender: peeking around a tree, crawling, the spider walk, hanging upside down, the face
+at the window, the jaw falling open. Its head can turn much further than it should, and when it follows you it
+moves in jerks, like a lagging player.
 
-⚠️ **Удаление мира необратимо.** Для проверок ставь `deleteWorldAtEnd = false` или играй в отдельном мире.
+## The finale (day 3)
+1. **The fall.** The silhouette stops appearing. As you walk, you **sink through the ground** – the camera passes
+   through the blocks, then black. The others fall after you.
+2. **The tunnel.** Everyone wakes up together at the start of an endless tunnel (dimension `brokenworld:tunnel`).
+   It stands far ahead. After **200 blocks** it appears far behind you and follows – slowly at first, then faster
+   than you can run.
+3. **The maze.** Whoever it catches gets a jumpscare and wakes up in a dark maze. **5 notes** lie in dead ends;
+   they must be **thrown into the pit** in the middle (Q).
+4. **The hall.** When all 5 notes are in the pit, everyone is moved into a **very long hall** and **cannot move**.
+   Far away it stands at a **lectern, reading a book** for **30 seconds**. Then the lectern bursts into particles,
+   it **grows twice as big** and **walks straight at you** – slowly, then faster and faster.
+5. **The end.** A jumpscare, creaking in the dark, the game leaves the world – and **the world is deleted**
+   (config `deleteWorldAtEnd`). On a server, players are just disconnected.
 
-## Как ведёт себя силуэт
-- **FAR** — стоит далеко на горизонте и смотрит.
-- **TREE_SIDE** — выглядывает из-за ствола дерева.
-- **TREE_TOP** — стоит на кроне дерева и смотрит вниз.
-- **BEHIND** — стоит прямо за спиной; повернёшься — исчезнет (со звуком).
-- **FOLLOW** — идёт за вами, пока вы не смотрите; замирает, когда смотрите.
-- **CAVE** — стоит в тёмном проходе пещеры.
-- **HOUSE** — ночью стоит снаружи у вашей кровати/дома (видно в окно).
-- **RUSH** — (стадия 3) заметили его — он бежит к вам, темнота + крик.
+## Commands (for testing; need op / cheats)
+- `/brokenworld info` – current stage and days to the next one
+- `/brokenworld stage <0-4>` – jump to a stage
+- `/brokenworld summon <mode>` – call the silhouette (`far`, `tree_side`, `tree_top`, `behind`, `follow`, `cave`, `house`, `ceiling`, `window`, `rush`)
+- `/brokenworld inspect` – a silhouette 3 blocks in front of you that does not vanish; `/brokenworld clear` removes them
+- `/brokenworld pose <stand|peek|crawl|hang|spider|window|scream|jerky>` – look at its poses up close
+- `/brokenworld freeze [on|off]` – posed silhouettes stop turning towards you
+- `/brokenworld screamer` – a jumpscare now
+- `/brokenworld crash` – the fake disconnect now
+- `/brokenworld visit` – somebody visits your house now (lists what was done)
+- `/brokenworld faceless on|off` – faceless mobs
+- `/brokenworld glitch hole|floating` – a hole / floating ground nearby
+- `/brokenworld playerlike` – the nearest animal starts acting like a player
+- `/brokenworld chat` – the stranger joins the chat now
+- `/brokenworld sunset` – the first-sunset flicker now
+- `/brokenworld corruption <0-1>|reset` – set how broken the textures and sounds are
+- `/brokenworld event footsteps|torch_out|door|mining|cave_sound`
+- `/brokenworld finale` / `/brokenworld finale stop` – start / stop the finale (⚠️ the end deletes the world)
 
-Он не атакует и не умирает: если его заметить и отвернуться, долго смотреть, подойти близко или ударить — он исчезает.
+## Config
+`config/brokenworld-common.toml`: days until the world breaks, days between stages and to the finale, the finale
+on/off, deleting the world at the end (`deleteWorldAtEnd`), the bigger house (`biggerHouse`), how often it appears
+(`appearanceFrequency`), jumpscares, world events, fake chat (`fakeChat`), the fake disconnect (`fakeCrash`), house
+visits (`homeVisits`), broken sounds (`brokenSounds`).
 
-## Команды для теста (нужны права OP / читы)
-- `/brokenworld info` — текущая стадия и сколько дней до следующей
-- `/brokenworld stage 1` — сразу «сломать» мир (0–4)
-- `/brokenworld screamer` — показать скример (проверка)
-- `/brokenworld faceless on` / `off` — мобы без лица
-- `/brokenworld glitch hole` / `floating` — дыра до дна мира / висящая земля где-то рядом
-- `/brokenworld playerlike` — ближайшее животное начнёт вести себя как игрок
-- `/brokenworld chat` — чужой игрок сейчас зайдёт в чат
-- `/brokenworld finale` — сразу начать финал (⚠️ в конце мир удалится, см. настройки);
-  `/brokenworld finale stop` — остановить и вернуть всех домой
-- `/brokenworld summon tree_side` — вызвать силуэт (`far`, `tree_side`, `tree_top`, `behind`, `follow`, `cave`, `house`, `rush`)
-- `/brokenworld inspect` — поставить силуэт в 3 блоках перед собой, он не исчезает (посмотреть модель вблизи); `inspect false` — без светящихся глаз. Ударь его или `/brokenworld clear` — убрать всех
-- `/brokenworld crash` — поддельный вылет прямо сейчас: «Соединение потеряно», «Загрузка мира…», а вокруг всё переставлено
-- `/brokenworld visit` — «кто-то был у тебя дома» прямо сейчас (у кровати, или вокруг тебя, если кровати нет)
-- `/brokenworld freeze` — силуэты из `inspect`/`pose` перестают поворачиваться к тебе (можно обойти и рассмотреть
-  со всех сторон); `/brokenworld freeze off` — снова поворачиваются
-- `/brokenworld pose peek` — силуэт перед тобой в позе из Blender: `peek` (выглядывает), `crawl` (ползёт),
-  `hang` (висит вниз головой), `spider` (паук), `window` (у окна), `scream` (раскрытый рот), `jerky` (дёргается); не исчезает, убрать — `clear`
-- `/brokenworld corruption 0.6` — сразу задать перемешанность текстур (0–1), `corruption reset` — вернуть по стадии
-- `/brokenworld event footsteps` — событие (`footsteps`, `torch_out`, `door`, `mining`, `cave_sound`)
+## Building
+- `gradlew build` – the mod jar in `build/libs`
+- `gradlew runClient` – a test client
+- `gradlew runGametest` – the GameTests (`FinaleGameTest`): the whole finale, the bigger house, the world falling
+  apart, player-like animals, the fake chat, the face at the window, house visits, the fake disconnect, broken sounds.
+  Report: `build/gametest-report.xml`.
 
-## Настройки
-`config/brokenworld-common.toml`: дни до поломки, дни между стадиями и до финала, финал вкл/выкл,
-удалять ли мир в конце (`deleteWorldAtEnd`), дом больше внутри вкл/выкл (`biggerHouse`), частота появлений,
-скримеры вкл/выкл, события мира вкл/выкл, поддельный вылет (`fakeCrash`), следы в доме (`homeVisits`),
-поломанные звуки (`brokenSounds`).
+## The model (Blender)
+The silhouette is a smooth mesh made in **Blender**: `blender/silhouette.blend` (collection `Silhouette`). The body,
+arms and legs are skeletons with Skin + Subdivision modifiers (move the points, change the thickness); elbows and
+knees are joints. A hunched 2.5-block creature: arms reaching below the knees with three claw fingers, a ridge of
+vertebrae, a long skull with deep black eye sockets, a hollow nose, sunken cheeks and a mouth full of needle teeth.
 
-## Проверка финала автоматически
-`gradlew runGametest` — тесты `FinaleGameTest` с тестовым игроком (отчёт: `build/gametest-report.xml`):
-- весь финал: провал → тоннель → 200 блоков → пойман → лабиринт → 5 записок в яму → зал → кафедра → конец;
-- дом: отойти → зайти → внутри больше → сломать стену → снова в маленьком доме;
-- мир рассыпается: дыра до бедрока, в постройки не врезается;
-- животное-«игрок»: без ника, замирает под взглядом, подходит, когда отворачиваешься.
+- `tools/blender_body.py` – body, arms, legs; `tools/blender_face.py` – head, jaw, eyes, teeth
+- `tools/blender_poses.py` – the rig and the poses (keyframed actions `<pose>__<part>`)
+- `tools/blender_export.py` – exports the parts (and simplified far-away copies) as OBJ + `pivots.json` + `poses.json`
+- `tools/blender_screamer.py` – renders the jumpscare picture
 
-## Позы и анимации (Blender)
-Позы сделаны в Blender как анимации (ключевые кадры) — `tools/blender_poses.py`:
-- **выглядывает** из-за дерева — наклонился вбок, рука вцепилась в ствол (когда он у дерева);
-- **ползёт** на животе, подтягиваясь руками (в пещерах, когда идёт за тобой; иногда в лабиринте);
-- **паучья ходьба** — выгнулся мостиком, животом вверх, голова вниз, бежит на руках и ногах (иногда при рывке на
-  тебя и когда ползёт за тобой в пещере);
-- **лицо в окне** — новый режим `window`: когда ты дома (со стадии 2), он снаружи у окна, лицо и ладони прижаты к
-  стеклу, когтями стучит по стеклу; увидишь его — постоит, медленно отойдёт от окна и пропадёт;
-- **висит вниз головой** с потолка — новый режим в пещерах и у тебя в доме (со стадии 2), и в лабиринте;
-- **рот открывается** — челюсть отдельная деталь (с нижними зубами): когда он бежит на тебя, в погоне в тоннеле
-  и когда идёт к тебе в зале.
+Change it: open `blender/silhouette.blend`, edit (keep the object names), run `tools/blender_export.py` in Blender
+(Scripting → Run Script), then F3+T in game or `gradlew build`.
 
-Ещё без новых моделей:
-- **голова поворачивается слишком далеко** — тело стоит, а голова следит за тобой хоть на 180°;
-- **дёрганое движение** — когда он идёт за тобой или гонится, он перескакивает рывками, как при лаге, и голова
-  подёргивается.
+## Cover and icon
+`cover/cover.png` (1920×1080) and `cover/icon.png` (512×512, under 100 KB):
+1. The block textures for the scene come from the game itself (they are Mojang's, so they are not in this
+   repository): extract `assets/minecraft/textures/block/*.png` (oak_log, oak_leaves, grass_block_top, stone,
+   diamond_ore, gold_block, cherry_leaves, ...) from `minecraft-client.jar` (Loom cache:
+   `~/.gradle/caches/fabric-loom/1.20.1/`) into `blender/cover_textures/`.
+2. `blender -b blender/silhouette.blend --python tools/render_cover.py` – the render (scene "Cover").
+3. `python tools/cover_text.py` – the title (font Rubik Glitch, SIL OFL: `cover/fonts/OFL.txt`) and the icons.
 
-Поправить позу: открыть `blender/silhouette.blend`, в Action Editor выбрать действие `<поза>__<часть>`
-(например `crawl__right_arm`), подвинуть ключевые кадры, потом запустить `tools/blender_export.py`.
+## Credits
+- Jumpscare sound made from [Horror Hit Soundpack 1](https://opengameart.org/content/horror-hit-soundpack-1)
+  by **psychhead_** (CC0) – `tools/make_scream.py`.
+- Cover font: **Rubik Glitch** (SIL Open Font License).
 
-## Модель силуэта
-Гладкая модель из вершин, сделана в **Blender**: `blender/silhouette.blend` (коллекция `Silhouette`).
-Тело, руки и ноги — «скелеты» с модификаторами Skin + Subdivision (можно двигать точки скелета и менять толщину).
-Сгорбленное существо 2,5 блока: руки ниже колен с тремя пальцами-когтями, выступающие позвонки,
-вытянутый череп с глубокими чёрными глазницами (одна ниже другой), провалом вместо носа,
-впалыми щеками и огромным раскрытым ртом с тонкими зубами-иглами. Глаза-щели светятся на поздних стадиях.
-
-Части = объекты коллекции (torso, head, eyes, teeth, right_arm, left_arm, right_leg, left_leg);
-точка начала объекта = точка поворота в игре (голова следит за игроком, руки и ноги шагают).
-Провалы (рот, глазницы) плавно темнеют до чёрного: у вершин головы есть атрибут `hole` (0 = кожа, 1 = чёрный).
-
-Тело строит `tools/blender_body.py`, лицо — `tools/blender_face.py` (запускать в Blender).
-
-Как поменять модель:
-1. Открыть `blender/silhouette.blend`, поправить (имена объектов не менять).
-2. В Blender: Scripting → открыть `tools/blender_export.py` → Run Script (или попросить Claude через Blender MCP).
-3. В игре F3+T (перезагрузка ресурсов) или `gradlew build`.
-
-Текстуры: `tools/gen_textures.py` (`silhouette.png` — кожа и провалы, `silhouette_eyes.png`, `silhouette_teeth.png`).
-Звук скримера: `tools/make_scream.py` — сведён из 4 звуков набора
-[Horror Hit Soundpack 1](https://opengameart.org/content/horror-hit-soundpack-1) (автор psychhead_, CC0) → `sounds/scream.ogg`.
-Картинка скримера: `tools/blender_screamer.py` (в Blender) → `textures/gui/screamer.png`.
-
-## Благодарности
-- Звук скримера сделан из [Horror Hit Soundpack 1](https://opengameart.org/content/horror-hit-soundpack-1)
-  от **psychhead_** (CC0).
-
-## Он был здесь
-- **Поддельный вылет** (со стадии 2, по разу на стадию, ночью или в помещении): настоящий экран «Соединение
-  потеряно», потом «Загрузка мира…» — а пока тебя «не было», факелы переставлены, двери открыты, в сундуке всё
-  перемешано, за спиной табличка «обернись», и ты стоишь лицом к ней. Пока экран открыт, тебя ничто не ранит.
-- **Следы в доме** (со стадии 2, когда ты далеко от кровати): табличка у кровати («я смотрел, как ты спишь»...),
-  дневник в сундуке, подписанный твоим ником, перемешанный сундук, переставленные факелы, открытые двери,
-  тропинка следов через траву к дому. Ничего не ломается и не пропадает.
-- **Поломанные звуки** (вместе с текстурами): некоторые звуки звучат как другие — в этом мире всегда одинаково
-  (корова может «мычать» дверью); иногда звук заикается, пропадает или звучит медленно и низко. Чем дальше,
-  тем больше. Выключить — `brokenSounds = false` в конфиге (там же `fakeCrash`, `homeVisits`).
-
-## Обложка и иконка
-`cover/cover.png` (1920×1080) и `cover/icon.png` (512×512, меньше 100 КБ):
-1. Текстуры блоков для сцены берутся из самой игры (в репозитории их нет — это файлы Mojang): распаковать из
-   `minecraft-client.jar` (кэш Loom: `~/.gradle/caches/fabric-loom/1.20.1/`) файлы `assets/minecraft/textures/block/*.png`
-   (oak_log, oak_leaves, grass_block_top, stone, diamond_ore, gold_block, cherry_leaves, ...) в `blender/cover_textures/`.
-2. `blender -b blender/silhouette.blend --python tools/render_cover.py` — рендер (сцена «Cover»).
-3. `python tools/cover_text.py` — надпись (шрифт Rubik Glitch, SIL OFL: `cover/fonts/OFL.txt`) и иконка, в т.ч. иконка мода.
+## License
+All Rights Reserved – see [LICENSE](LICENSE).
