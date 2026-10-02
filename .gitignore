@@ -1,0 +1,26 @@
+# gradle
+build/
+.gradle/
+out/
+bin/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+*.launch
+
+# the game runs (test worlds, logs, configs)
+run/
+run-data/
+
+# the ready-made jar for playing
+/brokenworld-*.jar
+
+# Blender backups
+*.blend1
