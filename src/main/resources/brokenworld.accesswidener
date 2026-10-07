@@ -8,3 +8,32 @@ accessible class net/minecraft/client/model/geom/ModelPart$Vertex
 
 # PlayerLikeAnimals: gives animals the player-like goal
 accessible field net/minecraft/world/entity/Mob goalSelector Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+
+# Hallucination (AlphaColors): the biomes of Alpha for a while
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects fogColor I
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects fogColor I
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects waterColor I
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects waterColor I
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects waterFogColor I
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects waterFogColor I
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects skyColor I
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects skyColor I
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects foliageColorOverride Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects foliageColorOverride Ljava/util/Optional;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects grassColorOverride Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects grassColorOverride Ljava/util/Optional;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects grassColorModifier Lnet/minecraft/world/level/biome/BiomeSpecialEffects$GrassColorModifier;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects grassColorModifier Lnet/minecraft/world/level/biome/BiomeSpecialEffects$GrassColorModifier;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects ambientParticleSettings Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects ambientParticleSettings Ljava/util/Optional;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects ambientLoopSoundEvent Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects ambientLoopSoundEvent Ljava/util/Optional;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects ambientAdditionsSettings Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects ambientAdditionsSettings Ljava/util/Optional;
+accessible field net/minecraft/world/level/biome/BiomeSpecialEffects backgroundMusic Ljava/util/Optional;
+mutable field net/minecraft/world/level/biome/BiomeSpecialEffects backgroundMusic Ljava/util/Optional;
+
+# BrokenFont / BrokenMenu: the font's letters and the title screen's splash text
+accessible field net/minecraft/client/gui/Font fonts Ljava/util/function/Function;
+mutable field net/minecraft/client/gui/Font fonts Ljava/util/function/Function;
+accessible field net/minecraft/client/gui/screens/TitleScreen splash Lnet/minecraft/client/gui/components/SplashRenderer;

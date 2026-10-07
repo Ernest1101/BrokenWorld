@@ -24,7 +24,10 @@ loom {
             if (project.hasProperty('profileWorld')) {
                 programArgs '--quickPlaySingleplayer', project.property('profileWorld')
                 vmArg "-XX:StartFlightRecording=delay=45s,duration=60s,settings=profile,filename=${project.property('jfrFile')}"
+                vmArg "-Dbrokenworld.shot=1"
             }
+            // ./gradlew runClient -PdevShot - screenshots of the broken menu / font (see BrokenMenu, BrokenFont)
+            if (project.hasProperty('devShot')) vmArg "-Dbrokenworld.shot=1"
         }
         server {
             runDir "run-server"

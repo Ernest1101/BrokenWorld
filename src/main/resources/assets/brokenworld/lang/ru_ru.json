@@ -69,5 +69,19 @@
   "fakechat.brokenworld.answer.dots": "...",
   "fakechat.brokenworld.answer.what": "что?",
   "fakechat.brokenworld.answer.didnt_write": "я ничего не писал",
-  "fakechat.brokenworld.answer.look_back": "посмотри назад"
+  "fakechat.brokenworld.answer.look_back": "посмотри назад",
+  "brokenworld.menu.splash.1": "Оно всё ещё там",
+  "brokenworld.menu.splash.2": "Ты тоже это видел?",
+  "brokenworld.menu.splash.3": "Деревья помнят",
+  "brokenworld.menu.splash.4": "Больше никто не играет",
+  "brokenworld.menu.splash.5": "Зачем ты вернулся?",
+  "brokenworld.menu.splash.6": "Не открывай мир",
+  "brokenworld.menu.splash.7": "Оно смотрело, как ты уходишь",
+  "brokenworld.menu.splash.8": "Обернись",
+  "brokenworld.menu.ended": "%s больше нет. А оно есть.",
+  "brokenworld.menu.button.1": "Не надо",
+  "brokenworld.menu.button.2": "Оно ждёт",
+  "brokenworld.menu.button.3": "Останься",
+  "brokenworld.menu.button.4": "Ты не уйдёшь",
+  "brokenworld.menu.button.5": "Вернись"
 }

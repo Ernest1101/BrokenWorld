@@ -46,6 +46,10 @@ public final class FacelessMobs {
 
     private FacelessMobs() {}
 
+    public static boolean isActive() {
+        return active;
+    }
+
     public static void setActive(boolean on) {
         if (on == active) return;
         active = on;
@@ -67,7 +71,7 @@ public final class FacelessMobs {
 
     public static void tick() {
         Minecraft mc = Minecraft.getInstance();
-        if (!active || mc.level == null || mc.player == null) return;
+        if (!active || mc.level == null || mc.player == null || Hallucination.active()) return;
         if (mc.level.getGameTime() % 20 != 0) return;
         for (Entity e : mc.level.entitiesForRendering()) {
             if (!(e instanceof LivingEntity living) || e instanceof Player || e.distanceToSqr(mc.player) > 96 * 96) continue;

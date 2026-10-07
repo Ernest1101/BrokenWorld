@@ -8,8 +8,10 @@ import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
@@ -30,19 +32,35 @@ public class BrokenWorldClient implements ClientModInitializer {
             return model;
         }));
 
-        HudRenderCallback.EVENT.register(ScreenFx::render);
+        HudRenderCallback.EVENT.register((g, partialTick) -> {
+            Hallucination.render(g);
+            ScreenFx.render(g, partialTick);
+        });
         ClientNetwork.register();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             ScreenFx.tick();
+            Hallucination.tick();
             FacelessMobs.tick();
             FakeDisconnect.tick();
             BrokenSounds.tick();
             WorldEnd.tick();
+            BrokenFont.tick(client);
+            BrokenMenu.tick(client);
+        });
+
+        // The main menu breaks as far as a world ever did.
+        ScreenEvents.AFTER_INIT.register((client, screen, width, height) -> {
+            if (screen instanceof TitleScreen title) {
+                BrokenMenu.onTitle(client, title);
+                ScreenEvents.afterRender(screen).register((s, g, mouseX, mouseY, delta) ->
+                        BrokenMenu.render(g, s.width, s.height));
+            }
         });
 
         // Leaving a broken world must not leave the next world broken.
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> client.execute(() -> {
+            if (Hallucination.active()) Hallucination.stop();
             TextureShuffle.reset();
             FacelessMobs.reset();
             ScreenFx.reset();
@@ -61,6 +79,7 @@ public class BrokenWorldClient implements ClientModInitializer {
             public void onResourceManagerReload(ResourceManager manager) {
                 SilhouetteRenderer.clearCache();
                 FacelessMobs.reset();
+                Hallucination.onResourcesReloaded();
             }
         });
     }

@@ -35,6 +35,7 @@ public final class ScreenFx {
             case FACELESS_ON -> FacelessMobs.setActive(true);
             case FACELESS_OFF -> FacelessMobs.setActive(false);
             case FAKE_CRASH -> FakeDisconnect.show(ticks);
+            case HALLUCINATION -> Hallucination.start(ticks);
             case SCREAMER, FINAL_SCREAMER -> {
                 Minecraft mc = Minecraft.getInstance();
                 if (type == ScreenFxPacket.Type.FINAL_SCREAMER) creakTicks = ticks + 70;

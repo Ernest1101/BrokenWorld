@@ -78,6 +78,10 @@ public final class BrokenWorldCommand {
                     return 1;
                 }))
                 .then(Commands.literal("visit").executes(BrokenWorldCommand::visit))
+                .then(Commands.literal("alpha")
+                        .executes(ctx -> alpha(ctx, 40))
+                        .then(Commands.argument("seconds", IntegerArgumentType.integer(1, 600))
+                                .executes(ctx -> alpha(ctx, IntegerArgumentType.getInteger(ctx, "seconds")))))
                 .then(Commands.literal("faceless")
                         .then(Commands.literal("on").executes(ctx -> faceless(ctx, true)))
                         .then(Commands.literal("off").executes(ctx -> faceless(ctx, false))))
@@ -185,6 +189,14 @@ public final class BrokenWorldCommand {
     private static int stopFinale(CommandContext<CommandSourceStack> ctx) {
         Finale.stop(ctx.getSource().getServer());
         ctx.getSource().sendSuccess(() -> Component.translatable("commands.brokenworld.finale_stopped"), true);
+        return 1;
+    }
+
+    /** "Minecraft Alpha" now, for that many seconds. */
+    private static int alpha(CommandContext<CommandSourceStack> ctx, int seconds) throws CommandSyntaxException {
+        ServerPlayer player = ctx.getSource().getPlayerOrException();
+        int stage = BrokenWorldState.get(ctx.getSource().getServer()).getStage();
+        Director.hallucination(player.serverLevel(), player, stage, seconds * 20);
         return 1;
     }
 

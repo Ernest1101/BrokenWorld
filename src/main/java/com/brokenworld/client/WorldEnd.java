@@ -48,6 +48,7 @@ public final class WorldEnd {
             mc.clearLevel();
         }
         ScreenFx.reset();
+        MenuMemory.worldEnded(levelId); // the menu will remember this one
 
         if (deleteIt) {
             try (LevelStorageSource.LevelStorageAccess access = mc.getLevelSource().createAccess(levelId)) {

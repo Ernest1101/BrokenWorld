@@ -54,7 +54,7 @@ public final class BrokenSounds {
      */
     @Nullable
     public static SoundInstance filter(SoundInstance sound) {
-        if (sound == null || replaying || !Config.BROKEN_SOUNDS.get()) return sound;
+        if (sound == null || replaying || !Config.BROKEN_SOUNDS.get() || Hallucination.active()) return sound;
         float corruption = TextureShuffle.corruption();
         if (corruption <= 0F || sound.isLooping() || sound instanceof TickableSoundInstance) return sound;
         ResourceLocation id = sound.getLocation();

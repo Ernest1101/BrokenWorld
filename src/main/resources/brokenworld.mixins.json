@@ -10,7 +10,8 @@
   ],
   "client": [
     "client.SoundEngineMixin",
-    "client.AgeableListModelAccessor"
+    "client.AgeableListModelAccessor",
+    "client.EntityRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

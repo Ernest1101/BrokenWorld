@@ -85,7 +85,9 @@ public final class ModNetwork {
             /** ...and get them back. */
             FACELESS_OFF,
             /** The real "Connection Lost" screen for `ticks`, then "Loading terrain...", then back to the game. */
-            FAKE_CRASH
+            FAKE_CRASH,
+            /** "Minecraft Alpha" for `ticks`: the old textures, nothing broken (client/Hallucination). */
+            HALLUCINATION
         }
 
         void encode(FriendlyByteBuf buf) {

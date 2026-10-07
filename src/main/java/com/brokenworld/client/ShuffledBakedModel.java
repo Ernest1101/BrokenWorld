@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -58,6 +59,13 @@ public class ShuffledBakedModel extends ForwardingBakedModel {
     public void emitBlockQuads(BlockAndTintGetter level, BlockState state, BlockPos pos,
                                Supplier<RandomSource> randomSupplier, RenderContext context) {
         Renderer renderer = RendererAccess.INSTANCE.getRenderer();
+        if (renderer != null && Hallucination.active()) {
+            BlockState alpha = AlphaBlocks.of(state);
+            if (alpha != state) {
+                emitAlpha(renderer, level, alpha, pos, randomSupplier, context);
+                return;
+            }
+        }
         if (renderer == null || !TextureShuffle.isShuffled(state, pos)) {
             super.emitBlockQuads(level, state, pos, randomSupplier, context);
             return;
@@ -70,6 +78,27 @@ public class ShuffledBakedModel extends ForwardingBakedModel {
             RenderMaterial material = material(renderer, drawn);
             for (BakedQuad quad : model.getQuads(drawn, side, randomSupplier.get())) {
                 emitter.fromVanilla(quad, material, side);
+                emitter.emit();
+            }
+        }
+    }
+
+    /** The block drawn as its Alpha ancestor (see AlphaBlocks), coloured as that block, or not at all. */
+    private static void emitAlpha(Renderer renderer, BlockAndTintGetter level, BlockState alpha, BlockPos pos,
+                                  Supplier<RandomSource> randomSupplier, RenderContext context) {
+        if (alpha.isAir()) return;
+        BakedModel model = modelOf(alpha);
+        RenderMaterial material = material(renderer, alpha);
+        BlockColors colors = Minecraft.getInstance().getBlockColors();
+        QuadEmitter emitter = context.getEmitter();
+        for (Direction side : SIDES) {
+            for (BakedQuad quad : model.getQuads(alpha, side, randomSupplier.get())) {
+                emitter.fromVanilla(quad, material, side);
+                if (quad.isTinted()) { // (the game would tint it as the real block: a birch leaf birch-coloured)
+                    int c = 0xFF000000 | colors.getColor(alpha, level, pos, quad.getTintIndex());
+                    for (int i = 0; i < 4; i++) emitter.color(i, c);
+                    emitter.colorIndex(-1);
+                }
                 emitter.emit();
             }
         }

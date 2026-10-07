@@ -124,6 +124,20 @@ public final class Config {
     public static final BooleanValue BROKEN_SOUNDS = new BooleanValue("brokenSounds", true,
             "Sounds break along with the textures: they sound like other things, stutter, drop out, slow down");
 
+    public static final BooleanValue HALLUCINATIONS = new BooleanValue("hallucinations", true,
+            "From stage 2: now and then, for half a minute, the world looks like Minecraft Alpha (the game's own old textures) - then it snaps back");
+
+    public static final BooleanValue ALPHA_TEXTURES = new BooleanValue("alphaTextures", true,
+            "Hallucinations use the real Minecraft Alpha 1.2.6 textures: from your launcher's a1.2.6 if you have it, else\n"
+                    + "downloaded once (about 1 MB) from Mojang's own servers into brokenworld/alpha/. false = only the built-in Programmer Art");
+
+    public static final BooleanValue BROKEN_FONTS = new BooleanValue("brokenFonts", true,
+            "The game's font breaks along with the world: letters swapped, turned to runes, flickering and shaking");
+
+    public static final BooleanValue BROKEN_MENU = new BooleanValue("brokenMenu", true,
+            "The main menu remembers how far a world broke (brokenworld/memory.properties) and breaks too: the logo, the\n"
+                    + "panorama, the splash text, the buttons. Delete that file to mend it");
+
     private Config() {}
 
     /** Reads the file (if there is one) and writes it back complete. */

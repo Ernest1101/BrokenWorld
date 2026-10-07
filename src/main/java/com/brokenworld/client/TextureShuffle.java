@@ -59,8 +59,10 @@ public final class TextureShuffle {
     /** Called when the server sends a new corruption value. */
     public static void update(float newCorruption, long newSalt) {
         boolean changed = newCorruption != corruption || newSalt != salt;
+        if (newCorruption > 0F) AlphaAssets.prefetch(); // the world is breaking: get the old game ready for later
         corruption = newCorruption;
         salt = newSalt;
+        MenuMemory.sawCorruption(newCorruption); // (the main menu remembers)
         if (changed) rebuildVisibleChunks();
     }
 
@@ -69,7 +71,7 @@ public final class TextureShuffle {
     }
 
     /** Re-mesh loaded chunk sections. Old meshes stay visible until the new ones are ready. */
-    private static void rebuildVisibleChunks() {
+    public static void rebuildVisibleChunks() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || mc.player == null) return;
         int radius = mc.options.getEffectiveRenderDistance() + 1;
@@ -99,7 +101,7 @@ public final class TextureShuffle {
 
     /** Is this block at this position drawn wrong at all? */
     public static boolean isShuffled(BlockState state, BlockPos pos) {
-        if (!active()) return false;
+        if (!active() || Hallucination.active()) return false;
         Kind kind = kindOf(state);
         if (kind == Kind.NONE) return false;
         float threshold = (kind == Kind.LOG || kind == Kind.LEAVES) ? treeThreshold() : otherThreshold();

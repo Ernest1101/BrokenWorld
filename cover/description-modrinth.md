@@ -28,10 +28,15 @@ Broken World is a slow-burn horror mod. It starts as a completely normal surviva
 - Your house is bigger on the inside.
 - While you are away, somebody visits your house: a sign by your bed, a diary written in your name, things moved around.
 - Your game "loses connection"... and when you come back, things are not where you left them.
+- The game's font breaks: letters turn into other letters and runes, flicker and shake.
+- The main menu remembers. Even outside the world, the logo tears, the panorama darkens, and something stands in it.
+- Sometimes, for half a minute, it is **Minecraft Alpha** again: the old textures, Alpha's colours, none of today's blocks, plants or mobs, the old music, nothing broken. Then it isn't.
 
 **On the third night, it ends.** We won't spoil how.
 
 > ⚠️ **Warning:** by default, **the world is deleted at the very end** of the story. Play in a new world, or turn it off in the config (`deleteWorldAtEnd = false`).
+
+> ℹ️ **Alpha textures:** no Mojang textures are included in this mod. For the Alpha hallucinations it uses the Alpha 1.2.6 client from your launcher if you have it, otherwise it downloads it **once (about 1 MB) from Mojang's official servers** into `brokenworld/alpha/`. Turn it off with `alphaTextures = false` (then the game's built-in old "Programmer Art" textures are used).
 
 ---
 
@@ -58,7 +63,7 @@ Works in singleplayer, LAN and on servers. Everyone goes through the ending toge
 `config/brokenworld-common.toml`:
 - how many days until the world breaks, and how fast the stages go
 - the finale on/off, deleting the world at the end on/off
-- fake chat, the bigger house, jumpscares, world events, the fake disconnect, house visits, broken sounds: each on/off
+- fake chat, the bigger house, jumpscares, world events, the fake disconnect, house visits, broken sounds, hallucinations, real Alpha textures, the broken font and main menu: each on/off
 - how often the silhouette and events appear
 
 ---
@@ -70,7 +75,7 @@ Works in singleplayer, LAN and on servers. Everyone goes through the ending toge
 - `/brokenworld summon [mode]` – call the silhouette
 - `/brokenworld pose <peek|crawl|hang|spider|window|scream|jerky>` – look at its poses up close
 - `/brokenworld freeze` – posed silhouettes stop turning towards you
-- `/brokenworld screamer`, `/brokenworld crash`, `/brokenworld visit`, `/brokenworld faceless on|off`
+- `/brokenworld screamer`, `/brokenworld crash`, `/brokenworld visit`, `/brokenworld alpha`, `/brokenworld faceless on|off`
 - `/brokenworld finale` / `/brokenworld finale stop`
 
 ---

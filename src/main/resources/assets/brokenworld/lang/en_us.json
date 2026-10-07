@@ -69,5 +69,19 @@
   "fakechat.brokenworld.answer.dots": "...",
   "fakechat.brokenworld.answer.what": "what?",
   "fakechat.brokenworld.answer.didnt_write": "i didn't write anything",
-  "fakechat.brokenworld.answer.look_back": "look behind you"
+  "fakechat.brokenworld.answer.look_back": "look behind you",
+  "brokenworld.menu.splash.1": "It's still there",
+  "brokenworld.menu.splash.2": "Did you see it too?",
+  "brokenworld.menu.splash.3": "The trees remember",
+  "brokenworld.menu.splash.4": "Nobody else is playing",
+  "brokenworld.menu.splash.5": "Why did you come back?",
+  "brokenworld.menu.splash.6": "Don't open the world",
+  "brokenworld.menu.splash.7": "It watched you leave",
+  "brokenworld.menu.splash.8": "Look behind you",
+  "brokenworld.menu.ended": "%s is gone. It is not.",
+  "brokenworld.menu.button.1": "Don't",
+  "brokenworld.menu.button.2": "It's waiting",
+  "brokenworld.menu.button.3": "Stay here",
+  "brokenworld.menu.button.4": "You can't leave",
+  "brokenworld.menu.button.5": "Go back"
 }
