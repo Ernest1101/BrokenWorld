@@ -47,6 +47,7 @@ public final class Director {
         long nextChat;
         long nextVisit;
         long nextCrash;
+        long nextAlpha;
         @Nullable SilhouetteEntity active;
     }
 
@@ -173,6 +174,12 @@ public final class Director {
                 t.nextCrash = now + (fitting ? scaled(interval(stage, 0, 0, 6000, 12000, 3600, 7200)) : 600);
             }
 
+            // For a while it is the old game again - and then it is not.
+            if (stage >= 2 && Config.HALLUCINATIONS.get() && now >= t.nextAlpha) {
+                hallucination(level, player, stage, 600 + RANDOM.nextInt(300));
+                t.nextAlpha = now + scaled(interval(stage, 0, 0, 12000, 21600, 7200, 14400));
+            }
+
             // The world itself coming apart: holes to the bottom of the world, pieces of ground in the air.
             if (stage >= 2 && Config.WORLD_EVENTS.get() && now >= t.nextGlitch) {
                 WorldGlitches.Type type = RANDOM.nextInt(3) == 0 ? WorldGlitches.Type.HOLE : WorldGlitches.Type.FLOATING;
@@ -237,6 +244,19 @@ public final class Director {
         return falseDay > 0;
     }
 
+    /**
+     * "Minecraft Alpha" for `ticks` (the client paints the old textures; see client/Hallucination). In stage 3, when
+     * it ends, the silhouette is standing right behind them.
+     */
+    public static void hallucination(ServerLevel level, ServerPlayer player, int stage, int ticks) {
+        ModNetwork.sendFx(player, ModNetwork.ScreenFxPacket.Type.HALLUCINATION, ticks);
+        if (stage >= 3) {
+            Scheduler.schedule(ticks, () -> {
+                if (player.isAlive() && player.level() == level) spawn(level, player, Mode.BEHIND, stage);
+            });
+        }
+    }
+
     /** Its face and the hit, then the picture comes back. */
     public static void screamer(ServerPlayer player) {
         ModNetwork.sendFx(player, ModNetwork.ScreenFxPacket.Type.SCREAMER, 30);
@@ -280,6 +300,7 @@ public final class Director {
         t.nextChat = now + scaled(interval(stage, 6000, 18000, 4800, 12000, 2400, 7200));
         t.nextVisit = now + scaled(interval(stage, 0, 0, 6000, 12000, 3600, 7200));
         t.nextCrash = now + scaled(interval(stage, 0, 0, 7200, 14400, 3600, 9600));
+        t.nextAlpha = now + scaled(interval(stage, 0, 0, 4800, 12000, 3600, 9600));
         return t;
     }
 
@@ -294,6 +315,7 @@ public final class Director {
             t.nextChat = now + 2400 + RANDOM.nextInt(6000);
             t.nextVisit = now + 3600 + RANDOM.nextInt(6000);
             t.nextCrash = now + 4800 + RANDOM.nextInt(9600);
+            t.nextAlpha = now + 3600 + RANDOM.nextInt(7200);
         }
     }
 

@@ -41,6 +41,7 @@ public final class ClientSetup {
         event.registerReloadListener((ResourceManagerReloadListener) manager -> {
             SilhouetteRenderer.clearCache();
             FacelessMobs.reset();
+            Hallucination.onResourcesReloaded();
         });
     }
 }

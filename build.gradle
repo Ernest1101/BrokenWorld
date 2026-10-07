@@ -89,7 +89,10 @@ minecraft {
             if (project.hasProperty('profileWorld')) {
                 args '--quickPlaySingleplayer', project.property('profileWorld')
                 jvmArgs "-XX:StartFlightRecording=delay=45s,duration=60s,settings=profile,filename=${project.property('jfrFile')}"
+                jvmArgs "-Dbrokenworld.shot=1"
             }
+            // ./gradlew runClient -PdevShot - screenshots of the broken menu / font (see BrokenMenu, BrokenFont)
+            if (project.hasProperty('devShot')) jvmArgs "-Dbrokenworld.shot=1"
         }
 
         server {

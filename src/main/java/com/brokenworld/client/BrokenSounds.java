@@ -44,7 +44,7 @@ public final class BrokenSounds {
     @SubscribeEvent
     public static void onPlay(PlaySoundEvent event) {
         SoundInstance sound = event.getSound();
-        if (sound == null || replaying || !Config.BROKEN_SOUNDS.get()) return;
+        if (sound == null || replaying || !Config.BROKEN_SOUNDS.get() || Hallucination.active()) return;
         float corruption = TextureShuffle.corruption();
         if (corruption <= 0F || sound.isLooping() || sound instanceof TickableSoundInstance) return;
         ResourceLocation id = sound.getLocation();

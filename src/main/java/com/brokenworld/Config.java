@@ -69,5 +69,23 @@ public class Config {
             .comment("Sounds break along with the textures: some sound like other things, stutter, drop out, music slows down")
             .define("brokenSounds", true);
 
+    public static final ForgeConfigSpec.BooleanValue HALLUCINATIONS = BUILDER
+            .comment("From stage 2: now and then, for half a minute, the world looks like Minecraft Alpha (the game's own old textures) - then it snaps back")
+            .define("hallucinations", true);
+
+    public static final ForgeConfigSpec.BooleanValue ALPHA_TEXTURES = BUILDER
+            .comment("Hallucinations use the real Minecraft Alpha 1.2.6 textures: from your launcher's a1.2.6 if you have it, else",
+                    "downloaded once (about 1 MB) from Mojang's own servers into brokenworld/alpha/. false = only the built-in Programmer Art")
+            .define("alphaTextures", true);
+
+    public static final ForgeConfigSpec.BooleanValue BROKEN_FONTS = BUILDER
+            .comment("The game's font breaks along with the world: letters swapped, turned to runes, flickering and shaking")
+            .define("brokenFonts", true);
+
+    public static final ForgeConfigSpec.BooleanValue BROKEN_MENU = BUILDER
+            .comment("The main menu remembers how far a world broke (brokenworld/memory.properties) and breaks too: the logo, the",
+                    "panorama, the splash text, the buttons. Delete that file to mend it")
+            .define("brokenMenu", true);
+
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 }

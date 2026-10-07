@@ -42,6 +42,7 @@ public final class ScreenFx {
             case FACELESS_ON -> FacelessMobs.setActive(true);
             case FACELESS_OFF -> FacelessMobs.setActive(false);
             case FAKE_CRASH -> FakeDisconnect.show(ticks);
+            case HALLUCINATION -> Hallucination.start(ticks);
             case SCREAMER, FINAL_SCREAMER -> {
                 Minecraft mc = Minecraft.getInstance();
                 if (type == ScreenFxPacket.Type.FINAL_SCREAMER) creakTicks = ticks + 70;
@@ -94,6 +95,7 @@ public final class ScreenFx {
     }
 
     private static void render(ForgeGui gui, GuiGraphics g, float partialTick, int width, int height) {
+        Hallucination.render(g);
         if (screamerTicks > 0) renderScreamer(g, partialTick, width, height);
         if (black > 0F) {
             int alpha = Math.round(Math.min(1F, black) * 255F);
@@ -134,11 +136,38 @@ public final class ScreenFx {
 
         @SubscribeEvent
         public static void onClientTick(TickEvent.ClientTickEvent event) {
-            if (event.phase == TickEvent.Phase.END) tick();
+            if (event.phase == TickEvent.Phase.END) {
+                tick();
+                Hallucination.tick();
+                BrokenFont.tick(Minecraft.getInstance());
+                BrokenMenu.tick(Minecraft.getInstance());
+            }
+        }
+
+        /** During a "Minecraft Alpha" hallucination, the mobs Alpha did not have are not drawn. */
+        @SubscribeEvent
+        public static void onRenderLiving(net.minecraftforge.client.event.RenderLivingEvent.Pre<?, ?> event) {
+            if (Hallucination.active() && AlphaBlocks.hidden(event.getEntity())) event.setCanceled(true);
+        }
+
+        /** The main menu breaks as far as a world ever did. */
+        @SubscribeEvent
+        public static void onScreenInit(net.minecraftforge.client.event.ScreenEvent.Init.Post event) {
+            if (event.getScreen() instanceof net.minecraft.client.gui.screens.TitleScreen title) {
+                BrokenMenu.onTitle(Minecraft.getInstance(), title);
+            }
+        }
+
+        @SubscribeEvent
+        public static void onScreenRender(net.minecraftforge.client.event.ScreenEvent.Render.Post event) {
+            if (event.getScreen() instanceof net.minecraft.client.gui.screens.TitleScreen screen) {
+                BrokenMenu.render(event.getGuiGraphics(), screen.width, screen.height);
+            }
         }
 
         @SubscribeEvent
         public static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
+            if (Hallucination.active()) Hallucination.stop();
             reset();
         }
     }

@@ -66,6 +66,30 @@ Once the world is broken: go more than 48 blocks away from your house (your bed)
 From outside it looks normal. Walk out through the door and you are outside your door; try to break the walls from
 inside and you are suddenly back in your small house.
 
+## Hallucinations
+From stage 2, now and then, for half a minute or so, **it is Minecraft Alpha again**: the real Alpha 1.2.6 block,
+item and mob textures, "Minecraft Alpha v1.2.6" in the corner, an old C418 track – and nothing is broken: no wrong
+textures, no wrong sounds. Everything Alpha did not have is gone: today's blocks look like their Alpha ancestors (every
+log an oak log, every stone stone), plants, flowers, vines and bamboo it never had disappear, newer mobs are not there,
+and the biomes have Alpha's grass, leaf, sky and water colours. Then it snaps back. In stage 3, when it does, it is standing right behind you.
+(`/brokenworld alpha [seconds]` – one now; config `hallucinations`.)
+
+No Alpha textures are shipped with this mod. They are read from the game: from the Alpha 1.2.6 client if your
+launcher has it (enable "historical versions" and install `a1.2.6`), otherwise the mod downloads that client
+**once** (about 1 MB) **from Mojang's own servers** into `brokenworld/alpha/`, checks its checksum, and reads the
+textures from it. Offline, or with `alphaTextures = false`, the hallucinations use the game's built-in old textures
+("Programmer Art") instead.
+
+## The font and the menu break too
+- **Broken font** – as the world breaks, so does the game's font: some letters are drawn as other letters (all of
+  one letter at once, a different one every few seconds), some as the enchanting table's runes, letters flicker into
+  noise and shake, and sometimes for a moment all text turns to garbage. (config `brokenFonts`)
+- **Broken main menu** – the menu remembers how far a world ever broke (`brokenworld/memory.properties`): the logo
+  tears and loses letters, the panorama goes grey and dark – red once a world has reached the end – and the
+  silhouette stands in it, the splash text says other things ("Why did you come back?"), buttons twitch and for a
+  second say "You can't leave"; at its worst, it is there for a moment. The buttons still work. (config `brokenMenu`;
+  delete `memory.properties` to mend the menu)
+
 ## It was here
 - **Fake disconnect** (from stage 2, once per stage, at night or indoors): the game's real "Connection Lost"
   screen, then "Loading terrain..." – and while you were "gone", torches moved, doors opened, a chest was gone
@@ -115,6 +139,7 @@ moves in jerks, like a lagging player.
 - `/brokenworld freeze [on|off]` – posed silhouettes stop turning towards you
 - `/brokenworld screamer` – a jumpscare now
 - `/brokenworld crash` – the fake disconnect now
+- `/brokenworld alpha [seconds]` – a "Minecraft Alpha" hallucination now
 - `/brokenworld visit` – somebody visits your house now (lists what was done)
 - `/brokenworld faceless on|off` – faceless mobs
 - `/brokenworld glitch hole|floating` – a hole / floating ground nearby
@@ -129,7 +154,8 @@ moves in jerks, like a lagging player.
 `config/brokenworld-common.toml`: days until the world breaks, days between stages and to the finale, the finale
 on/off, deleting the world at the end (`deleteWorldAtEnd`), the bigger house (`biggerHouse`), how often it appears
 (`appearanceFrequency`), jumpscares, world events, fake chat (`fakeChat`), the fake disconnect (`fakeCrash`), house
-visits (`homeVisits`), broken sounds (`brokenSounds`).
+visits (`homeVisits`), broken sounds (`brokenSounds`), hallucinations (`hallucinations`), real Alpha textures for
+them (`alphaTextures`), the broken font (`brokenFonts`) and main menu (`brokenMenu`).
 
 ## Building
 - `gradlew build` – the mod jar in `build/libs`
